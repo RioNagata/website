@@ -1,0 +1,30 @@
+{
+  "name": "assessment_server",
+  "version": "1.0.0",
+  "description": "assessment server",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RioNagata/assessment.git"
+  },
+  "keywords": [
+    "assessment",
+    "server"
+  ],
+  "author": "Rio Nagata",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RioNagata/assessment/issues"
+  },
+  "homepage": "https://github.com/RioNagata/assessment#readme",
+  "dependencies": {
+    "@types/socket.io-client": "^3.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "socket.io": "^4.5.2",
+    "socket.io-client": "^4.5.2"
+  }
+}
