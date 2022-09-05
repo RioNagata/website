@@ -1,4 +1,4 @@
-const { Socket } = require("socket.io");
+//const { Socket } = require("socket.io");
 
 module.exports = {
     connect: function(io,PORT){
@@ -18,15 +18,16 @@ module.exports = {
 
                 socket.on('newroom', (newroom) => {
                     if (rooms.indexOf(newroom) == -1){
+                        console.log(newroom + 'created');
                         rooms.push(newroom);
                         chat.emit('roomlist', JSON.stringify(rooms));
                     }
                 });
 
-                socket.on('roomlist', (m) => {
+                socket.on('roomlist', () => {
                     chat.emit('roomlist', JSON.stringify(rooms));
                 });
-
+                
                 socket.on('numusers', (room) => {
                     var usercount = 0;
                     for (i = 0; i < socketRoomnum.length; i++){
@@ -44,33 +45,34 @@ module.exports = {
                             for (i = 0; i < socketRoom.length; i++){
                                 if(socketRoom[i][0] == socket.id){
                                     socketRoom[i][1] = room;
-                                    inroom = true
+                                      //inroomSocketarray = true
                                 }
                             }
-                        if(inroomSocketarray == false){
-                            socketRoom.push([socket.id, room]);
-                            var hasroomnum = false;
-                            for (let j = 0; j < socketRoomnum.length; j++){
-                                if (socketRoomnum[j][0] == room){
-                                    socketRoomnum[j][1] = socketRoomnum[j][1] + 1;
-                                    hasroomnum = true;
+                            if(inroomSocketarray == false){
+                                socketRoom.push([socket.id, room]);
+                                var hasroomnum = false;
+                                for (let j = 0; j < socketRoomnum.length; j++){
+                                    if (socketRoomnum[j][0] == room){
+                                        socketRoomnum[j][1] = socketRoomnum[j][1] + 1;
+                                        hasroomnum = true;
+                                    }
                                 }
+                                if (hasroomnum == false){
+                                    socketRoomnum.push([room, 1]);
+                                }
+                                chat.in(room).emit("notice", "A new user has joined");
                             }
-                            if (hasroomnum == false){
-                                socketRoomnum.push([room, 1]);
-                            }
-                        }
-                        chat.in(room).emit("notice", "A new user has joined");
                         });
-                        return chat.in(room).emit("joined", room);
+                    return chat.in(room).emit("joined", room);
                     }
                 });
+                
                 socket.on('leaveRoom', (room) => {
                     for (let i = 0; i<socketRoom.length; i++){
                         if (socketRoom[i][0] == socket.id){
                             socketRoom.splice(i,1);
                             socket.leave(room);
-                            chat.to(room).emit("notice", "a user has left");
+                            chat.to(room).send("notice", "a user has left");
                         }
                     }
                     for (let j = 0; j<socketRoomnum.length; j++){
@@ -82,6 +84,7 @@ module.exports = {
                         }
                     }
                 });
+                
                 socket.on('disconect', ()=>{
                     chat.emit("disconnect");
                     for (let i = 0; i < socketRoom.length; i++){

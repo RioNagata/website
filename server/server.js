@@ -25,6 +25,7 @@ const io = require('socket.io')(http, {
         methods: ["GET", "POST"],
     }
 });
+//const io = require('socket.io')(http);
 
 const sockets = require('./sockets.js');
 const server = require('./listen.js');

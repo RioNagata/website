@@ -14,9 +14,20 @@ module.exports = function(req, res){
         if (i == -1) {
             res.send({"ok": false});
         } else {
-            console.log(userArray[i]);
-            //send information to the front-end
-            res.send({"ok":true, "data": userArray[i], "alldata": userArray});
+            res.send({"ok":true, "data": userArray[i]});
+            /*console.log(userArray[i]);
+            fs.readFile('./group.json', 'utf8', function(err, data){
+                if (err) throw err;
+                let groupArray = JSON.parse(data);
+                let i = groupArray.findIndex(group => (group.userid == user.userid));
+                if (i == -1) {
+                    res.send({"ok": false});
+                } else {
+                    console.log(groupArray[i]);
+                    //send information to the front-end
+                    res.send({"ok":true, "data": userArray[i], "groupData": groupArray[i]});
+                }
+            });*/
         }
     });
 }
