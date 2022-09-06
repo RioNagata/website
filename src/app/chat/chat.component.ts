@@ -36,7 +36,7 @@ export class ChatComponent implements OnInit {
     this.socketService.getMessage((m:any)=>{this.messages.push(m)});
     this.socketService.reqroomList();
     this.socketService.getroomList((msg:any)=>{this.rooms = JSON.parse(msg)});
-    this.socketService.notice((msg:any)=>{this.roomnotice = msg});
+    this.socketService.notice((notice:any)=>{this.roomnotice = notice});
     this.socketService.joined((msg:any)=>{this.currentroom = msg
       if(this.currentroom != ""){
         this.isinRoom = true;
@@ -71,7 +71,7 @@ export class ChatComponent implements OnInit {
   leaveroom(){
     this.socketService.leaveroom(this.currentroom);
     this.socketService.reqnumusers(this.currentroom);
-    this.socketService.getnumusers((res:any) => {this.numusers = res});
+    this.socketService.getnumusers((res:number) => {this.numusers = res});
     this.roomslist = "";
     this.currentroom = "";
     this.isinRoom = false;
@@ -81,10 +81,15 @@ export class ChatComponent implements OnInit {
   }
 
   createroom(){
-    console.log(this.createroom);
-    this.socketService.createroom(this.newroom);
-    this.socketService.reqroomList();
-    this.newroom = "";
+    if (this.newroom != ""){
+      console.log(this.createroom);
+      this.socketService.createroom(this.newroom);
+      this.socketService.reqroomList();
+      this.newroom = "";
+    } else {
+      alert("place name for new room");
+      this.newroom == "";
+    }
   }
 
 /*

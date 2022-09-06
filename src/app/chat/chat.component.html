@@ -26,11 +26,9 @@
         <input type="text" [(ngModel)]="newroom" *ngIf="isadmin" name="newroom" id="newroom" class="form-control"/>
         <button (click)="createroom()" class="btn btn-primary" *ngIf="isadmin">create new room</button>
     </form>
-    <h2 *ngIf="isinRoom">Chat messages for {{currentroom}} - {{numusers}} Active Users</h2>
+    <h2 *ngIf="isinRoom">Chat messages for {{currentroom}}</h2>
     <button *ngIf="isinRoom" (click)="leaveroom()" class="btn btn-primary">Leave</button> &nbsp;
-        <ul>
-            <li *ngFor="let message of messages">{{message}}</li>
-        </ul>
+    <p>{{roomnotice}}</p>
     <form>
         <div class="form-group" *ngIf="isinRoom">
             <label for="messagecontent">New Message</label>
@@ -38,6 +36,9 @@
             <button *ngIf="isinRoom" (click)="chat()" class="btn btn-primary">Chat</button> &nbsp;
         </div>
     </form>
+    <ul>
+        <li *ngFor="let message of messages">{{message}}</li>
+    </ul>
 </div>
 
 <!--<li *ngFor= "let  m of messages">{{m}}</li>-->

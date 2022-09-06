@@ -1,19 +1,24 @@
-//const { Socket } = require("socket.io");
+//const { socket } = require("socket.io");
 
 module.exports = {
     connect: function(io,PORT){
         var rooms = ["room 1", "room 2", "room 3", "room 4"];
         var socketRoom = [];
         var socketRoomnum = [];
+        var inroomSocketarray = false;
+        var hasroomnum = false;
         const chat = io.of('/chat');
 
             chat.on('connection', (socket) => {
                 socket.on('message', (message) => {
+                    /*
                     for (i = 0; i < socketRoom.length; i++){
                         if (socketRoom[i][0] = socket.id){
                             chat.to(socketRoom[i][1]).emit('message', message);
+                            console.log('message: ' + message);
                         }
-                    }
+                    }*/
+                    chat.emit('message', message);
                 });
 
                 socket.on('newroom', (newroom) => {
@@ -32,38 +37,36 @@ module.exports = {
                     var usercount = 0;
                     for (i = 0; i < socketRoomnum.length; i++){
                         if(socketRoomnum[i][0] == room){
-                            usercount = socketRoomnum[i][1];
+                            usercount = socketRoomnum[i][1].length;
                         }
                     }
-                    chat.in(room).emit('numusers', usercount);
+                    return chat.in(room).emit('numusers', usercount);
                 });
 
-                socket.on("joinRoom", (room)=> {
+                socket.on('joinroom', (room) => {
                     if(rooms.includes(room)){
                         socket.join(room, () =>{
-                            var inroomSocketarray = false
                             for (i = 0; i < socketRoom.length; i++){
                                 if(socketRoom[i][0] == socket.id){
                                     socketRoom[i][1] = room;
-                                      //inroomSocketarray = true
+                                    inroomSocketarray = true;
                                 }
                             }
-                            if(inroomSocketarray == false){
+                            if(inroomSocketarray == true){
                                 socketRoom.push([socket.id, room]);
-                                var hasroomnum = false;
                                 for (let j = 0; j < socketRoomnum.length; j++){
                                     if (socketRoomnum[j][0] == room){
                                         socketRoomnum[j][1] = socketRoomnum[j][1] + 1;
                                         hasroomnum = true;
                                     }
                                 }
-                                if (hasroomnum == false){
+                                if (hasroomnum == true){
                                     socketRoomnum.push([room, 1]);
                                 }
                                 chat.in(room).emit("notice", "A new user has joined");
                             }
                         });
-                    return chat.in(room).emit("joined", room);
+                       return chat.in(room).emit('joined', room);
                     }
                 });
                 

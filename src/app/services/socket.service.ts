@@ -26,11 +26,11 @@ export class SocketService {
     });
   }
   */
- joinroom(selroom:any):void{
-  this.socket.emit("joinRoom", selroom);
+ joinroom(selroom:any): void{
+  this.socket.emit("joinroom", selroom);
  }
 
- leaveroom(selroom:any):void{
+ leaveroom(selroom: any): void{
   this.socket.emit("leaveRoom", selroom);
  }
 
@@ -42,11 +42,11 @@ export class SocketService {
   this.socket.emit('newroom', newroom);
  }
 
- reqnumusers(selroom:any){
+ reqnumusers(selroom: any){
   this.socket.emit("numusers", selroom);
  }
 
- getnumusers(selroom:any){
+ getnumusers(selroom: any){
   this.socket.emit("numusers", selroom);
  }
 
