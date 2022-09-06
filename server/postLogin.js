@@ -10,7 +10,7 @@ module.exports = function(req, res){
         let userArray = JSON.parse(data);
         //console.log(userArray);
         let i = userArray.findIndex(user =>
-            ((user.email == u) && (user.password == p)));
+            ((user.username == u) && (user.password == p)));
         if (i == -1) {
             res.send({"ok": false});
         } else {
