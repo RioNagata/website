@@ -10,7 +10,7 @@ module.exports = {
         const chat = io.of('/chat');
 
             chat.on('connection', (socket) => {
-                socket.on('message', (message) => {
+                socket.on('message', (message, username) => {
                     /*
                     for (i = 0; i < socketRoom.length; i++){
                         if (socketRoom[i][0] = socket.id){
@@ -18,7 +18,8 @@ module.exports = {
                             console.log('message: ' + message);
                         }
                     }*/
-                    chat.emit('message', message);
+                    var newmessage = username +': ' + message;
+                    chat.emit('message', newmessage);
                 });
 
                 socket.on('newroom', (newroom) => {

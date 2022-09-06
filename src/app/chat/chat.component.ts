@@ -101,8 +101,8 @@ export class ChatComponent implements OnInit {
   }
   */
   chat(){
-    if(this.messagecontent){
-      this.socketService.sendMessage(this.messagecontent);
+    if(this.messagecontent, this.username){
+      this.socketService.sendMessage(this.messagecontent, this.username);
       this.messagecontent = null;
     } else {
       console.log("no message");
