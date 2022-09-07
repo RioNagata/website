@@ -6,13 +6,13 @@ Git is used to display the history of changes happened during the development of
 
 ## Data structure 
 
-There are one type of data structure used in this project and this is both for the users. This will be the user data structure. I wanted to include the group data structure but didn't happened because of time limitation and skill issue.  User data structure consists of email, password, username, userid, and user role.
+There are one type of data structure used in this project and this is both for the users. This will be the user data structure. I wanted to include the group data structure but didn't happened because of time limitation and skill issue.  User data structure consists of email, password, username, userid, and user role.g
 
 ## Angular architecture
 
 **Login Component** 
 
-Login Component is the default route and a component for the login page for the chat system. The login page includes a header called ChatChannel, an email form, password form, and the Login button. When the Login button has pressed, the checkuser function which will check the email and password. If the login ok return true, the user's username and userrole will set as a sessionStorage and sends the page to the chat page. 
+Login Component is the default route and a component for the login page for the chat system. The login page includes a header called ChatChannel, an username form, password form, and the Login button. When the Login button has pressed, the checkuser function which will check the username and password. If the login ok return true, the user's username and userrole will set as a sessionStorage and sends the page to the chat page. 
 
 If the login ok returns false, it will display an alert saying that the login has been wrong. 
 
@@ -60,7 +60,7 @@ REST API is used in this project to authenticate user. Authenticating user used 
 ## Communication between Server and Front-end
 
 **Login Function**
-When the user inputs their email and password to login, the data is send to the server-side and uses postLogin.js to check the login. in the postLogin.js, the input data is stored as u and p, then reads the users.json file and reads through all user's email and password to check for authentication. If there are user that has the same email and password, the server will send back the user's information to the front-end. If there were no user that has the email and password, it will send back a false to the front.
+When the user inputs their username and password to login, the data is send to the server-side and uses postLogin.js to check the login. in the postLogin.js, the input data is stored as u and p, then reads the users.json file and reads through all user's username and password to check for authentication. If there are user that has the same username and password, the server will send back the user's information to the front-end. If there were no user that has the username and password, it will send back a false to the front.
 
 **Create Room**
 When the admin created a new chat room, the front-end sends the new chat room name to the server. Then the server side uses that data to push it to the roomlist array. Then the server side passes the new roomlist array to the front to diplay it. 
@@ -73,10 +73,4 @@ When the user pressed the leave button when they're inside the room, leaveroom f
 
 **Send Message**
 When the user post a message, the front-end sends the new message and the username to the server. Then the server uses the message and username data to push it to the message array. Then the server side passes the message to the front to diplay it. After the message has sent, the messagecontent variable become empty. 
-
-
-
-
-
-
 

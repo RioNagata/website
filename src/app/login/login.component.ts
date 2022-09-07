@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   public checkuser(){
     this.httpClient.post(BACKEND_URL + '/login', this.userpwd, httpOptions)
       .subscribe((data:any) => {
-        alert(JSON.stringify(this.userpwd));
+        //alert(JSON.stringify(this.userpwd));
         if (data.ok){
           this.httpClient.post<Userpwd[]>(BACKEND_URL + '/login', this.userpwd, httpOptions)
           .subscribe((m: any) => {console.log(m[0]);});
