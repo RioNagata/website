@@ -10,6 +10,8 @@ import { CommonModule } from '@angular/common';
 import { SocketService } from './services/socket.service';
 import { ChatComponent } from './chat/chat.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UserlistComponent } from './userlist/userlist.component';
+import { UpdateuserComponent } from './updateuser/updateuser.component';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppComponent,
     LoginComponent,
     GroupChannelComponent,
-    ChatComponent
+    ChatComponent,
+    UserlistComponent,
+    UpdateuserComponent
   ],
   imports: [
     BrowserModule,

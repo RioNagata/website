@@ -1,23 +1,34 @@
-var express = require('express');
-var app = express();
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+const http = require('http').Server(app);
+const cors = require('cors');
+const MongoClient = require('mongodb').MongoClient;
+var ObjectID = require('mongodb').ObjectID;
 
-var cors = require('cors');
+const PORT = 3000;
+const sockets = require('./socket.js');
+
 app.use(cors());
-
-//var request = require('request');
-
-
-var bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
+const url = 'mongodb://127.0.0.1:27017/' //'mongodb:localhost:27017/';
+MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true}, function(err, client){
+    if (err) {return console.log(err)}
+        //require('./listen.js')
+        const dbName = 'assessment';
+        const db = client.db(dbName);
+        console.log();
 
-app.use(express.static(__dirname + '../dist/week4tut/'));
-console.log(__dirname);
+        require('./app/add.js')(db,app);
+        require('./app/remove.js')(db,app);
+        require('./app/update.js')(db,app);
+        require('./app/getuser.js')(db, app, ObjectID)
+        require('./app/login.js')(db, app);
+        const PORT = 3000;
+        const server = require('./listen.js');
+        server.listen(http, PORT);
 
-var http = require("http").Server(app);
-/*var server = http.listen(3000, function(){
-    console.log("server listening on port: 3000");
-});*/
+});
 
 const io = require('socket.io')(http, {
     cors: {
@@ -25,14 +36,5 @@ const io = require('socket.io')(http, {
         methods: ["GET", "POST"],
     }
 });
-//const io = require('socket.io')(http);
 
-const sockets = require('./sockets.js');
-const server = require('./listen.js');
-
-const PORT = 3000;
 sockets.connect(io, PORT);
-server.listen(http, PORT);
-
-app.post('/login', require('./postLogin.js'));
-app.post('/loginAfter', require('./postLoginafter.js'));

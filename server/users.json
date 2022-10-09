@@ -1,6 +1,0 @@
-[
-    {"email": "hello@gmail.com",  "password": "123", "userid":"1", "username":"Rio", "userrole": "super"},
-    {"email": "good@gmail.com",  "password": "456", "userid":"2", "username":"Sam", "userrole": "gadmin"},
-    {"email": "morning@gmail.com",  "password": "789", "userid":"3", "username":"Greg", "userrole": "gassist"},
-    {"email": "evening@gmail.com",  "password": "1234", "userid":"4", "username":"Mary", "userrole": "user"}
-]
