@@ -69,4 +69,12 @@ export class SocketService {
  getMessage(next: any){
   this.socket.on('message', (message:any) => next(message));
  }
+
+ sendImage(image: string, username: string):void{
+  this.socket.emit('image', image, username);
+ }
+
+ getImage(next: any){
+  this.socket.on('image', (image:any) => next(image));
+ }
 }

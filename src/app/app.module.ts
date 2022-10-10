@@ -5,23 +5,23 @@ import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { GroupChannelComponent } from './group-channel/group-channel.component';
 import { CommonModule } from '@angular/common';
 import { SocketService } from './services/socket.service';
 import { ChatComponent } from './chat/chat.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserlistComponent } from './userlist/userlist.component';
 import { UpdateuserComponent } from './updateuser/updateuser.component';
+import { AdduserComponent } from './adduser/adduser.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    GroupChannelComponent,
     ChatComponent,
     UserlistComponent,
-    UpdateuserComponent
+    UpdateuserComponent,
+    AdduserComponent
   ],
   imports: [
     BrowserModule,

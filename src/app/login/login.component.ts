@@ -1,17 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup } from '@angular/forms';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-//import data from '../../../server/users.json';
-
-const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
-};
-
-import { NgForm } from '@angular/forms';
-import { Userpwd } from '../userpwd';
-
-const BACKEND_URL = 'http://localhost:3000';
+import { Login } from '../Login';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-login',
@@ -19,26 +9,41 @@ const BACKEND_URL = 'http://localhost:3000';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  username: string = "";
+  pwd: string = "";
+  loginform: Login | undefined;
+  newProductMessage="";
+  noticeshow:boolean=false;
 
-  userpwd: Userpwd = {username: '', pwd: ''}
+  constructor(private router: Router, private userdata: UsersService) { }
+
+  ngOnInit(): void {
+  }
   
-  ngOnInit(): void{
-}
-  constructor(private router: Router, private httpClient: HttpClient) { }
+  logOut(){
+    sessionStorage.clear();
+    this.router.navigate(['/']);
+  }
 
-  public checkuser(){
-    this.httpClient.post(BACKEND_URL + '/login', this.userpwd, httpOptions)
-      .subscribe((data:any) => {
-        //alert(JSON.stringify(this.userpwd));
-        if (data.ok){
-          this.httpClient.post<Userpwd[]>(BACKEND_URL + '/login', this.userpwd, httpOptions)
-          .subscribe((m: any) => {console.log(m[0]);});
-          sessionStorage.setItem("username", data.data['username']);
-          sessionStorage.setItem("userrole", data.data['userrole']);
+  Login(event: { preventDefault: () => void; }){
+    event.preventDefault();
+    if(this.username == "" || this.pwd == ""){
+      alert("Insert both username and password")
+    } else {
+      this.loginform = {
+        Username: this.username,
+        Password: this.pwd
+    }
+       //new Products("", this.productid,this.productname, this.productdesc, this.productprice, this.productprice, this.productunits);
+      this.userdata.login(this.loginform!).subscribe((data: any)=>{
+        if(data.err == null){
+          sessionStorage.setItem("username", data[0]['username']);
+          sessionStorage.setItem("userrole", data[0]['userrole']);
           this.router.navigateByUrl('chat');
         } else {
           alert("user or password is not valid")
         }
-    })
+      });
+    }
   }
 }

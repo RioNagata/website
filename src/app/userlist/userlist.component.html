@@ -1,1 +1,18 @@
-<p>userlist works!</p>
+<div class="container">
+    <h1>Users</h1>
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Price</th>
+        </tr>
+        <tr style="padding-top: 20px;" *ngFor="let user of users">
+            <td>{{user.username}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.userrole}}</td>
+            <td><button type="button" class="btn btn-primary btn-block mb-4" [routerLink]="['/update', user.userid]">Update</button></td>
+            <td><button type="button" class="btn btn-primary btn-block mb-4" (click)="deleteproduct(user.userid)">Delete</button></td>
+        </tr>
+    </table>
+</div>
+

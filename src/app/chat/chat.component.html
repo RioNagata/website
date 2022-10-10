@@ -31,6 +31,8 @@
     <p>{{roomnotice}}</p>
     <form>
         <div class="form-group" *ngIf="isinRoom">
+            <label for="messagecontent">Image</label>
+            <input type="file" ngModel="imagecontent" name="imagecontent" id="imagecontent" class="form-control">
             <label for="messagecontent">New Message</label>
             <input type="text" [(ngModel)]="messagecontent" name="messagecontent" id="messagecontent" class="form-control"/>
             <button *ngIf="isinRoom" (click)="chat()" class="btn btn-primary">Chat</button> &nbsp;
@@ -38,6 +40,7 @@
     </form>
     <ul>
         <li *ngFor="let message of messages">{{message}}</li>
+        <li *ngFor="let image of images"><img src="{{image}}"></li>
     </ul>
 </div>
 

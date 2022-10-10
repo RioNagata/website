@@ -4,14 +4,12 @@ module.exports = function(db, app){
             res.sendStatus(400);
         }
         product = req.body;
-        console.log(product);
         const collection = db.collection('user');
-        collection.find({'username': product.username}).count((err, count) => {
+        collection.find({'username': product.Username}).count((err, count) => {
             console.log(count);
             if(count == 1){
                 const collection = db.collection('user');
-                collection.find({'userid': product.id}).toArray((err, data)=>{
-                    console.log(data);
+                collection.find({'username': product.Username}).toArray((err, data)=>{
                     res.send(data);
                 });
             } else {

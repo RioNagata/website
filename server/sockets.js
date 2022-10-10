@@ -22,6 +22,12 @@ module.exports = {
                     chat.emit('message', newmessage);
                 });
 
+                socket.on('image', (image, username) => {
+                    var newimage = username +': ' + image;
+                    console.log(newimage);
+                    chat.emit('image', newimage);
+                });
+
                 socket.on('newroom', (newroom) => {
                     if (rooms.indexOf(newroom) == -1){
                         console.log(newroom + 'created');
