@@ -2,7 +2,7 @@
 
 ## Git
 
-Git is used to display the history of changes happened during the development of this assessment. The commit was executed when functionality was implemented in the project and worked. Commits done in this assessment includes initial commit, user login, roomlist working, message function working, message with name, login system using username, assessment part 1 final, 
+Git is used to display the history of changes happened during the development of this assessment. The commit was executed when functionality was implemented in the project and worked. Commits done in this assessment includes initial commit, user login, roomlist working, message function working, message with name, login system using username, assessment part 1 final, server sider for assessment 2, login func work, testing done, read.md file fixed, comments for server-side, angular, small changes to add user, and final commit.
 
 ## Data structure 
 
