@@ -16,17 +16,8 @@ const formidable = require('formidable');
 //app.use(express.static(path.join(__dirname , '../dist/imageupload/')));
 app.use('./images',express.static(path.join(__dirname , './images')));
 require('./upload.js')(app,formidable,fs,path);
-/*
-const {PeerServer} = require('peer');
-const peerServer = PeerServer({
-    port: 3000,
-    ssl: {
-        key: fs.readFileSync('/path/to/your/ssl/key/here.key'),
-        cert: fs.readFileSync('/path/to/your/ssl/certificate/here.crt')
-    }
-});
-*/
 
+// code for sockets.io
 const io = require('socket.io')(http, {
     cors: {
         origin: "http://localhost:4200",
@@ -37,6 +28,7 @@ const io = require('socket.io')(http, {
 const sockets = require('./sockets.js');
 sockets.connect(io, PORT);
 const url = 'mongodb://127.0.0.1:27017/' //'mongodb:localhost:27017/';
+// connect to mongo database
 MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true}, function(err, client){
     if (err) {return console.log(err)}
         //require('./listen.js')

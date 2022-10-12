@@ -11,22 +11,25 @@ module.exports = {
             const chat = io.of('/chat');
 
             chat.on('connection', (socket) => {
+                // function for sending message
                 socket.on('message', (message, username) => {
                     var newmessage = username +': ' + message;
                     chat.emit('message', newmessage);
                 });
-
+                // function for sending images
                 socket.on('image', (image, username) => {
                     var newimage = username +': ' + image;
                     console.log(newimage);
                     chat.emit('image', newimage);
                 });
-
+                // function for creating new room
                 socket.on('newroom', (newroom) => {
                     if (rooms.indexOf(newroom) == -1){
                         const collection = db.collection('rooms');
+                        //checks if room is already existed
                         collection.find({'roomname': newroom}).count((err, count) => {
                             if(count == 0){
+                                //if not, create the room
                                 collection.insertOne(newroom, (err,dbres)=>{
                                     if (err) throw err;
                                     console.log(newroom + 'created');
@@ -34,13 +37,14 @@ module.exports = {
                                     chat.emit('roomlist', rooms);
                                 });
                             } else {
+                                // gives error if already there
                                 res.send({num:0, err:"duplicate room"});
                                 console.log("room not inserted");
                             }
                         });
                     }
                 });
-
+                // function for displaying list of rooms
                 socket.on('roomlist', () => {
                     const collection= db.collection('rooms');
                     collection.find({}).toArray((err, data)=>{
@@ -49,7 +53,7 @@ module.exports = {
                         console.log(rooms);
                     });
                 });
-                
+                // function for displaying number of users in a room
                 socket.on('numusers', (room) => {
                     var usercount = 0;
                     for (i = 0; i < socketRoomnum.length; i++){
@@ -59,7 +63,7 @@ module.exports = {
                     }
                     return chat.in(room).emit('numusers', usercount);
                 });
-
+                // function for joining room
                 socket.on('joinroom', (room) => {
                     const collection = db.collection('rooms');
                     collection.find({'roomname': room}).count((err, count) => {
@@ -89,7 +93,7 @@ module.exports = {
                         }
                     });
                 });
-                
+                // function for leaving room
                 socket.on('leaveRoom', (room) => {
                     for (let i = 0; i<socketRoom.length; i++){
                         if (socketRoom[i][0] == socket.id){

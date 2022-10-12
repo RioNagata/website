@@ -5,6 +5,7 @@ module.exports = function(db,app,ObjectID){
         }
         productID = req.body.productid;
         const collection = db.collection('user');
+        // delete the user from the database
         collection.deleteOne({userid:productID}, (err,docs)=> {
             collection.find({}).toArray((err, data)=>{
                 res.send((data));

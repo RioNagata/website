@@ -6,9 +6,11 @@ module.exports = function(db, app){
         product = req.body;
         console.log(product);
         const collection = db.collection('user');
+        // finds the user in the database using the data send from front-end
         collection.find({'userid': product.userid}).count((err, count) => {
             console.log(count);
             if(count == 1){
+                // if user is found, update the data of the user 
                 collection.updateOne({userid: product.userid}, {$set: {username: product.username, email: product.email, password: product.password, userrole: product.userrole}}, (err,dbres)=>{
                     if (err) throw err;
                     let num = dbres.insertedCount;
@@ -16,6 +18,7 @@ module.exports = function(db, app){
                     console.log("item updated");
                 });
             } else {
+                // if user not found, give error
                 res.send({num:0, err:"item not available"});
                 console.log("item not updated");
             }
