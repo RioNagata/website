@@ -6,15 +6,13 @@ Git is used to display the history of changes happened during the development of
 
 ## Data structure 
 
-There are 3 type of data structure used in this project and this is for the users, rooms and logins. I wanted to include the group data structure but didn't happened because of time limitation and skill issue.  User data structure consists of email, password, username, userid, and user role, which all of the structures are using string as a data type. Login data structure consists on username and password for login component. The room data structures consist on room
+There are 3 type of data structure used in this project and this is for the users, rooms and logins. I wanted to include the group data structure but didn't happened because of time limitation and skill issue.  User data structure consists of email, password, username, userid, and user role, which all of the structures are using string as a data type. Login data structure consists on username and password for login component. The room data structures consist of only roomname, which is used for chat component.
 
 ## Angular architecture
 
 **Login Component** 
 
-Login Component is the default route and a component for the login page for the chat system. The login page includes a header called ChatChannel, an username form, password form, and the Login button. When the Login button has pressed, the checkuser function which will check the username and password. If the login ok return true, the user's username and userrole will set as a sessionStorage and sends the page to the chat page. 
-
-If the login ok returns false, it will display an alert saying that the login has been wrong. 
+Login Component is the default route and a component for the login page for the chat system. The login page includes a header called ChatChannel, an username form, password form, and the Login button. When the Login button has pressed, the checkuser function which will check the username and password. If either username and password is not available, it will return and error saying "Insert both username and password". If the login ok return true, the system will access to mongodb to access the user's information, and the user's username and userrole will set as a sessionStorage and sends the page to the chat page. If the login ok returns false, it will return an error saying "user or password is not valid".
 
 **Chat Component**
 
@@ -75,6 +73,11 @@ updateuser(): This method sends the user's information to update the user's info
 deleteuser(): This method sends the user's userid to delete the user from the database
 
 login(login: Login): This method sends the login information to do login authentication for the login component.
+
+##### Image Upload 
+This project uses image upload Service to communicate between fornt-end and back-end for image upload.
+
+imgupload(): This method sends image data to the server-side to add image.
 
 
 ## REST API

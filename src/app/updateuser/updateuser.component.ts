@@ -28,25 +28,30 @@ export class UpdateuserComponent implements OnInit {
 
   editProduct(event: { preventDefault: () => void; }){
     event.preventDefault();
-    if(this.updateid == null){
-      console.log('error');
-    } else {
-      this.updateuser = {
-        userid: this.updateid,
-        username: this.updatename,
-        email: this.updateemail,
-        password: this.updatepassword,
-        userrole: this.updaterole
-    }
-    console.log(this.updateuser);
-      this.userdata.updateuser(this.updateuser!).subscribe((data: any)=>{
-        this.updateid = "";
-        this.updatename = "";
-        this.updateemail = "";
-        this.updaterole = "";
-        this.updatepassword = "";
-        this.router.navigateByUrl('user');
-      });
+    console.log(this.updaterole);
+    if(this.updatename == "" || this.updateemail == "" || this.updatepassword == "" || this.updaterole == ""){
+      alert('missing information');
+    } else{
+      if(this.updaterole == 'user' || this.updaterole == 'gassist' || this.updaterole == 'gadmin' || this.updaterole == 'super' ){
+        this.updateuser = {
+          userid: this.updateid,
+          username: this.updatename,
+          email: this.updateemail,
+          password: this.updatepassword,
+          userrole: this.updaterole
+      }
+        console.log(this.updateuser);
+        this.userdata.updateuser(this.updateuser!).subscribe((data: any)=>{
+          this.updateid = "";
+          this.updatename = "";
+          this.updateemail = "";
+          this.updaterole = "";
+          this.updatepassword = "";
+          this.router.navigateByUrl('user');
+        });
+      }else {
+        alert('user role needs to be super, gassist, gadmin or user');
+      }
     }
   }
 }
