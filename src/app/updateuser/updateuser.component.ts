@@ -35,16 +35,17 @@ export class UpdateuserComponent implements OnInit {
         userid: this.updateid,
         username: this.updatename,
         email: this.updateemail,
-        userrole: this.updaterole,
-        password: this.updatepassword
+        password: this.updatepassword,
+        userrole: this.updaterole
     }
+    console.log(this.updateuser);
       this.userdata.updateuser(this.updateuser!).subscribe((data: any)=>{
         this.updateid = "";
         this.updatename = "";
         this.updateemail = "";
         this.updaterole = "";
         this.updatepassword = "";
-        this.router.navigateByUrl('');
+        this.router.navigateByUrl('user');
       });
     }
   }

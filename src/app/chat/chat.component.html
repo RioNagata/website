@@ -16,7 +16,7 @@
         <select [(ngModel)] = "roomslist" *ngIf="!isinRoom" name="roomslist">
             <option [ngValue]="null">Select Room</option>
             <option *ngFor="let room of rooms">
-                {{room}}
+                {{room.roomname}}
             </option>
         </select>
         <div class="form-group">
@@ -35,7 +35,7 @@
             <input type="file" ngModel="imagecontent" name="imagecontent" id="imagecontent" class="form-control">
             <label for="messagecontent">New Message</label>
             <input type="text" [(ngModel)]="messagecontent" name="messagecontent" id="messagecontent" class="form-control"/>
-            <button *ngIf="isinRoom" (click)="chat()" class="btn btn-primary">Chat</button> &nbsp;
+            <button *ngIf="isinRoom" (click)="chat()" class="btn btn-primary" name="createroom" id="createroom">Chat</button> &nbsp;
         </div>
     </form>
     <ul>

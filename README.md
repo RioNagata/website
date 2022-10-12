@@ -2,11 +2,11 @@
 
 ## Git
 
-Git is used to display the history of changes happened during the development of this assessment. The commit was executed when functionality was implemented in the project and worked.
+Git is used to display the history of changes happened during the development of this assessment. The commit was executed when functionality was implemented in the project and worked. Commits done in this assessment includes initial commit, user login, roomlist working, message function working, message with name, login system using username, assessment part 1 final, 
 
 ## Data structure 
 
-There are one type of data structure used in this project and this is both for the users. This will be the user data structure. I wanted to include the group data structure but didn't happened because of time limitation and skill issue.  User data structure consists of email, password, username, userid, and user role.g
+There are 3 type of data structure used in this project and this is for the users, rooms and logins. I wanted to include the group data structure but didn't happened because of time limitation and skill issue.  User data structure consists of email, password, username, userid, and user role, which all of the structures are using string as a data type. Login data structure consists on username and password for login component. The room data structures consist on room
 
 ## Angular architecture
 
@@ -15,7 +15,6 @@ There are one type of data structure used in this project and this is both for t
 Login Component is the default route and a component for the login page for the chat system. The login page includes a header called ChatChannel, an username form, password form, and the Login button. When the Login button has pressed, the checkuser function which will check the username and password. If the login ok return true, the user's username and userrole will set as a sessionStorage and sends the page to the chat page. 
 
 If the login ok returns false, it will display an alert saying that the login has been wrong. 
-
 
 **Chat Component**
 
@@ -27,7 +26,17 @@ Chat component is the main feature of this project. When the user has logged in,
 | Chat | Sends the message that user has written. This only applies if user has written a message | chat() |
 | Log Out | Logout the user. The page will redirect to Login page | logOut() |
 
+**Adduser Component**
+Adduser component is the component that adds the user into the system. Adduser page includes the form for adding a new user. Adding user needs to include all information aboout users such as username, email, password, userrole and userid. User cannot be created if one or more information is missing. When user form send to the front-end, the database checks if the userid is taken or not. If the userid is not taken, then the user will added to the database and sends the page to the user page. 
+
+**Updateuser Component**
+Updateuser component is the component that updates the user into the system. Updateuser page includes the form for updating user information. Updating user needs to include all information aboout users such as username, email, password, userrole and userid. User information cannot be changed if one or more information is missing. When user form send to the front-end, the database checks if the userid is already in the database. If the userid is already there, then the user information will updated to the database and sends the page to the user page. 
+
+**Users Component**
+Users Component is the component that displays all user's data into a webpage in a table format. the table consists of user's information such as username, user email, userrole, and each has an edit button to navigate to update user page, and delete button to delete the user. When the user pressed delete button, the user is deleted from the database and the page will be reloaded to see that the user is deleted. 
+
 **Services**
+##### Socket Service 
 This project uses sockets service to use socket.io.
 
 initSocket(): This method initialises socket.
@@ -53,6 +62,20 @@ notice(): This method send to the back-end server to active notice event with us
 sendMessage(): This method sends the message to the back end server.
 
 grabMessage(): This method grabs the message send by sendMessage to display it in the page for every user.
+
+##### Users Service
+This project uses users service to communicate between front and back-end for mongodb
+
+add(): This method sends new user's information to add user to the database.
+
+getuser(): This method retrieves array of user's data from the database.
+
+updateuser(): This method sends the user's information to update the user's information
+
+deleteuser(): This method sends the user's userid to delete the user from the database
+
+login(login: Login): This method sends the login information to do login authentication for the login component.
+
 
 ## REST API
 REST API is used in this project to authenticate user. Authenticating user used POST method to post the login info to the back end. Parameter used was username which is string and password which is a string. If the user and password in in the userlist and correct, it will return {"ok":true, "data": userArray[i]} which means that the user was login and send the user's data to the front-end. If not, it will return {"ok": false} which means that the login is wrong. 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SocketService } from '../services/socket.service';
 import { Router } from '@angular/router';
 import { ImguploadService } from '../services/imgupload.service';
+import { Room } from '../Rooms';
 const SERVER_URL = 'http://localhost:3000'
 export interface ExampleTab {
   label: string;
@@ -20,12 +21,13 @@ export class ChatComponent implements OnInit {
   images:string[] = [];
   messages:string[] = [];
   ioConnection: any;
-  rooms = [];
+  rooms: Room[] = [];
   roomslist: string="";
   roomnotice: string="";
   currentroom: string="";
   isinRoom=false;
   newroom:string="";
+  createnewroom: Room | undefined;
   numusers:number=0;
   isadmin = false;
   role = sessionStorage.getItem('userrole');
@@ -39,7 +41,11 @@ export class ChatComponent implements OnInit {
     this.socketService.getMessage((m:any)=>{this.messages.push(m)});
     this.socketService.getImage((i:any)=>{this.images.push(i)});
     this.socketService.reqroomList();
-    this.socketService.getroomList((msg:any)=>{this.rooms = JSON.parse(msg)});
+    this.socketService.getroomList((msg:any)=>{
+      msg.forEach((element: Room[]) => {
+        this.rooms = element;
+      });
+    });
     this.socketService.notice((notice:any)=>{this.roomnotice = notice});
     this.socketService.joined((msg:any)=>{this.currentroom = msg
       if(this.currentroom != ""){
@@ -86,10 +92,13 @@ export class ChatComponent implements OnInit {
 
   createroom(){
     if (this.newroom != ""){
-      console.log(this.createroom);
-      this.socketService.createroom(this.newroom);
+      this.createnewroom = {
+        roomname: this.newroom,
+    }
+    console.log(this.createnewroom);
+      this.socketService.createroom(this.createnewroom);
       this.socketService.reqroomList();
-      this.newroom = "";
+      this.newroom = ""
     } else {
       alert("place name for new room");
       this.newroom == "";
@@ -123,7 +132,7 @@ export class ChatComponent implements OnInit {
     }
   }
 
-  /*
+  
   title = 'imageupload';
   selectedfile:any = null;
   imagepath="";
@@ -138,5 +147,5 @@ export class ChatComponent implements OnInit {
     this.imguploadService.imgupload(fd).subscribe(res=>{  
     this.imagepath = res.data.filename;
   });
-}*/
+}
 }

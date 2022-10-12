@@ -39,15 +39,14 @@ export class AdduserComponent implements OnInit {
       this.iderrorshow = !this.iderrorshow
     } else {
       this.newuser = {
-        userid: this.userid,
         username: this.username,
         email: this.email,
-        userrole: this.userrole,
-        password: this.password
+        userid: this.userid,
+        password: this.password,
+        userrole: this.userrole
     }
        //new Products("", this.productid,this.productname, this.productdesc, this.productprice, this.productprice, this.productunits);
       this.userdata.add(this.newuser!).subscribe((data: any)=>{
-        console.log(data);
         this.noticeshow;
         if(data.err == null){
           this.newProductMessage = data.num + " new user (" + this.username + ") was added";

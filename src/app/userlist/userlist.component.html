@@ -11,7 +11,7 @@
             <td>{{user.email}}</td>
             <td>{{user.userrole}}</td>
             <td><button type="button" class="btn btn-primary btn-block mb-4" [routerLink]="['/update', user.userid]">Update</button></td>
-            <td><button type="button" class="btn btn-primary btn-block mb-4" (click)="deleteproduct(user.userid)">Delete</button></td>
+            <td><button type="button" class="btn btn-primary btn-block mb-4" (click)="deleteproduct(user.userid)">Delete {{user.username}}</button></td>
         </tr>
     </table>
 </div>
