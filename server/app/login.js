@@ -5,7 +5,7 @@ module.exports = function(db, app){
         }
         product = req.body;
         const collection = db.collection('user');
-        collection.find({'username': product.Username}).count((err, count) => {
+        collection.find({'username': product.Username, 'password': product.Password}).count((err, count) => {
             console.log(count);
             if(count == 1){
                 const collection = db.collection('user');

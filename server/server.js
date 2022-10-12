@@ -8,18 +8,9 @@ const MongoClient = require('mongodb').MongoClient;
 var ObjectID = require('mongodb').ObjectID;
 
 const PORT = 3000;
-const sockets = require('./sockets.js');
 app.use(cors());
 app.use(bodyParser.json());
 
-const io = require('socket.io')(http, {
-    cors: {
-        origin: "http://localhost:4200",
-        methods: ["GET", "POST"],
-    }
-});
-
-sockets.connect(io, PORT);
 var fs = require('fs');
 const formidable = require('formidable');
 //app.use(express.static(path.join(__dirname , '../dist/imageupload/')));
@@ -35,6 +26,16 @@ const peerServer = PeerServer({
     }
 });
 */
+
+const io = require('socket.io')(http, {
+    cors: {
+        origin: "http://localhost:4200",
+        methods: ["GET", "POST"],
+    }
+});
+
+const sockets = require('./sockets.js');
+sockets.connect(io, PORT);
 const url = 'mongodb://127.0.0.1:27017/' //'mongodb:localhost:27017/';
 MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true}, function(err, client){
     if (err) {return console.log(err)}
@@ -46,11 +47,12 @@ MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true}, func
         require('./app/add.js')(db,app);
         require('./app/remove.js')(db,app);
         require('./app/update.js')(db,app);
-        require('./app/getuser.js')(db, app, ObjectID)
+        require('./app/getuser.js')(db, app, ObjectID);
         require('./app/login.js')(db, app);
-        const PORT = 3000;
+        require('./sockets.js')(db,app);
         const server = require('./listen.js');
         server.listen(http, PORT);
 
 });
+
 

@@ -2,22 +2,16 @@
 
 module.exports = {
     connect: function(io,PORT){
-        var rooms = ["room 1", "room 2", "room 3", "room 4"];
-        var socketRoom = [];
-        var socketRoomnum = [];
-        var inroomSocketarray = false;
-        var hasroomnum = false;
-        const chat = io.of('/chat');
+        module.exports = function(db, app){
+            var rooms = []
+            var socketRoom = [];
+            var socketRoomnum = [];
+            var inroomSocketarray = false;
+            var hasroomnum = false;
+            const chat = io.of('/chat');
 
             chat.on('connection', (socket) => {
                 socket.on('message', (message, username) => {
-                    /*
-                    for (i = 0; i < socketRoom.length; i++){
-                        if (socketRoom[i][0] = socket.id){
-                            chat.to(socketRoom[i][1]).emit('message', message);
-                            console.log('message: ' + message);
-                        }
-                    }*/
                     var newmessage = username +': ' + message;
                     chat.emit('message', newmessage);
                 });
@@ -30,14 +24,30 @@ module.exports = {
 
                 socket.on('newroom', (newroom) => {
                     if (rooms.indexOf(newroom) == -1){
-                        console.log(newroom + 'created');
-                        rooms.push(newroom);
-                        chat.emit('roomlist', JSON.stringify(rooms));
+                        const collection = db.collection('rooms');
+                        collection.find({'roomname': newroom}).count((err, count) => {
+                            if(count == 0){
+                                collection.insertOne(newroom, (err,dbres)=>{
+                                    if (err) throw err;
+                                    console.log(newroom + 'created');
+                                    rooms.push(newroom);
+                                    chat.emit('roomlist', rooms);
+                                });
+                            } else {
+                                res.send({num:0, err:"duplicate room"});
+                                console.log("room not inserted");
+                            }
+                        });
                     }
                 });
 
                 socket.on('roomlist', () => {
-                    chat.emit('roomlist', JSON.stringify(rooms));
+                    const collection= db.collection('rooms');
+                    collection.find({}).toArray((err, data)=>{
+                        rooms = [data];
+                        chat.emit('roomlist', rooms);
+                        console.log(rooms);
+                    });
                 });
                 
                 socket.on('numusers', (room) => {
@@ -51,30 +61,33 @@ module.exports = {
                 });
 
                 socket.on('joinroom', (room) => {
-                    if(rooms.includes(room)){
-                        socket.join(room, () =>{
-                            for (i = 0; i < socketRoom.length; i++){
-                                if(socketRoom[i][0] == socket.id){
-                                    socketRoom[i][1] = room;
-                                    inroomSocketarray = true;
-                                }
-                            }
-                            if(inroomSocketarray == true){
-                                socketRoom.push([socket.id, room]);
-                                for (let j = 0; j < socketRoomnum.length; j++){
-                                    if (socketRoomnum[j][0] == room){
-                                        socketRoomnum[j][1] = socketRoomnum[j][1] + 1;
-                                        hasroomnum = true;
+                    const collection = db.collection('rooms');
+                    collection.find({'roomname': room}).count((err, count) => {
+                        if(count == 1){
+                            socket.join(room, () =>{
+                                for (i = 0; i < socketRoom.length; i++){
+                                    if(socketRoom[i][0] == socket.id){
+                                        socketRoom[i][1] = room;
+                                        inroomSocketarray = true;
                                     }
                                 }
-                                if (hasroomnum == true){
-                                    socketRoomnum.push([room, 1]);
+                                if(inroomSocketarray == true){
+                                    socketRoom.push([socket.id, room]);
+                                    for (let j = 0; j < socketRoomnum.length; j++){
+                                        if (socketRoomnum[j][0] == room){
+                                            socketRoomnum[j][1] = socketRoomnum[j][1] + 1;
+                                            hasroomnum = true;
+                                        }
+                                    }
+                                    if (hasroomnum == true){
+                                        socketRoomnum.push([room, 1]);
+                                    }
+                                    chat.in(room).emit("notice", "A new user has joined");
                                 }
-                                chat.in(room).emit("notice", "A new user has joined");
-                            }
-                        });
-                       return chat.in(room).emit('joined', room);
-                    }
+                            });
+                            return chat.in(room).emit('joined', room);
+                        }
+                    });
                 });
                 
                 socket.on('leaveRoom', (room) => {
@@ -110,15 +123,6 @@ module.exports = {
                     console.log("client disconnected");
                 });
             });
-        /*
-        io.on('connection', (socket) => {
-            console.log('user connection on port ' + PORT + ' : ' 
-            + socket.id);
-
-            socket.on('message', (message) =>{
-                io.emit('message', message);
-            })
-        });
-        */
+        }
     }
 }

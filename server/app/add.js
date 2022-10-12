@@ -3,13 +3,11 @@ module.exports = function(db, app){
         if(!req.body){
             res.sendStatus(400);
         }
-        product = req.body;
-        console.log(product);
-        const collection = db.collection('products');
-        collection.find({'_id': product._id}).count((err, count) => {
-            console.log(count);
+        user = req.body;
+        const collection = db.collection('user');
+        collection.find({'userid': user.userid}).count((err, count) => {
             if(count == 0){
-                collection.insertOne(product, (err,dbres)=>{
+                collection.insertOne(user, (err,dbres)=>{
                     if (err) throw err;
                     let num = dbres.insertedCount;
                     res.send({'num': num, err: null});
