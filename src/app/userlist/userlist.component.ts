@@ -23,7 +23,7 @@ export class UserlistComponent implements OnInit {
       this.users = data;
     });
   }
-
+  // function for deleting user
   deleteproduct(id: any){
     if(confirm("Are you sure you want to delete this item?")){
       this.userdata.deleteuser(id).subscribe((data)=>{

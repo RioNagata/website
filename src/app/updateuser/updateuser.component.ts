@@ -25,13 +25,15 @@ export class UpdateuserComponent implements OnInit {
       this.updateid = params['iteminfo']
     })
   }
-
-  editProduct(event: { preventDefault: () => void; }){
+  // function for editing user info
+  editUser(event: { preventDefault: () => void; }){
     event.preventDefault();
     console.log(this.updaterole);
+    //if information is missing, send error
     if(this.updatename == "" || this.updateemail == "" || this.updatepassword == "" || this.updaterole == ""){
       alert('missing information');
     } else{
+      // if the role is either, user, gassist, gadmin, or super, set updated value into an array
       if(this.updaterole == 'user' || this.updaterole == 'gassist' || this.updaterole == 'gadmin' || this.updaterole == 'super' ){
         this.updateuser = {
           userid: this.updateid,
@@ -41,6 +43,7 @@ export class UpdateuserComponent implements OnInit {
           userrole: this.updaterole
       }
         console.log(this.updateuser);
+        // sends the array to the server-side, and reset all data
         this.userdata.updateuser(this.updateuser!).subscribe((data: any)=>{
           this.updateid = "";
           this.updatename = "";

@@ -61,13 +61,13 @@ export class ChatComponent implements OnInit {
     sessionStorage.clear();
     this.router.navigate(['']);
   }
-
+  // checks if the user is either super, gadmin or gassist
   public checkUser(){
     if (this.role == 'super' || this.role == 'gadmin' || this.role == 'gassist'){
       this.isadmin = true;
     }
   };
-
+  // function for joining the room
   joinroom(){
     this.socketService.joinroom(this.roomslist);
     this.socketService.reqnumusers(this.roomslist);
@@ -77,7 +77,7 @@ export class ChatComponent implements OnInit {
   clearnotice(){
     this.roomnotice = "";
   }
-
+  // function for leaving the room
   leaveroom(){
     this.socketService.leaveroom(this.currentroom);
     this.socketService.reqnumusers(this.currentroom);
@@ -89,7 +89,7 @@ export class ChatComponent implements OnInit {
     this.roomnotice = "";
     this.messages = [];
   }
-
+  // function for creating room
   createroom(){
     if (this.newroom != ""){
       this.createnewroom = {
@@ -104,15 +104,7 @@ export class ChatComponent implements OnInit {
       this.newroom == "";
     }
   }
-
-/*
-  private initIoConnection(){
-    this.socketService.initSocket();
-    this.ioConnection = this.socketService.onMessage().subscribe((message:any) => {
-        this.messages.push(message);
-      });
-  }
-  */
+  // function for sending image/message chat
   chat(){
     if(this.messagecontent, this.username){
       this.socketService.sendMessage(this.messagecontent, this.username);

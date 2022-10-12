@@ -33,19 +33,21 @@ export class AdduserComponent implements OnInit {
     return this.noticeshow ? 'show':'hide';
   }
 
-  addnewProduct(event: { preventDefault: () => void; }){
+  // function for adding users
+  addnewUser(event: { preventDefault: () => void; }){
     event.preventDefault();
     if(this.userid == null){
       this.iderrorshow = !this.iderrorshow
     } else {
       this.newuser = {
+        // sets newuser array value using the data from user
         username: this.username,
         email: this.email,
         userid: this.userid,
         password: this.password,
         userrole: this.userrole
     }
-       //new Products("", this.productid,this.productname, this.productdesc, this.productprice, this.productprice, this.productunits);
+    // sends the data to the server-side, resets all data
       this.userdata.add(this.newuser!).subscribe((data: any)=>{
         this.noticeshow;
         if(data.err == null){

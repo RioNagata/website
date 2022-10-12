@@ -10,22 +10,12 @@ export class SocketService {
 
   private socket: any;
   constructor() { }
-
+  // methods for sockets
   initSocket(): void{
     this.socket = io(SERVER_URL);
     //return ()=>{this.socket.disconnect();}
   }
-  /*
-  send(message: string){
-    this.socket.emit('message', message);
-  }
 
-  onMessage(){
-    return new Observable(observer=>{
-      this.socket.on('message', (data:any) => {observer.next(data)});
-    });
-  }
-  */
  joinroom(selroom:any): void{
   this.socket.emit("joinroom", selroom);
  }

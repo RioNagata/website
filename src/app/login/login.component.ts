@@ -24,19 +24,22 @@ export class LoginComponent implements OnInit {
     sessionStorage.clear();
     this.router.navigate(['/']);
   }
-
+  // function for logging in 
   Login(event: { preventDefault: () => void; }){
     event.preventDefault();
+    // if username or/and password is missing, send error
     if(this.username == "" || this.pwd == ""){
       alert("Insert both username and password")
     } else {
       this.loginform = {
+        // set loginform array's data as the new login data
         Username: this.username,
         Password: this.pwd
     }
-       //new Products("", this.productid,this.productname, this.productdesc, this.productprice, this.productprice, this.productunits);
+      // sends the server-side for logging ig
       this.userdata.login(this.loginform!).subscribe((data: any)=>{
         if(data.err == null){
+          //if login valid, set the username and role as a session storage
           sessionStorage.setItem("username", data[0]['username']);
           sessionStorage.setItem("userrole", data[0]['userrole']);
           this.router.navigateByUrl('chat');
