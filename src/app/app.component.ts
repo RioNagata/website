@@ -10,6 +10,7 @@ export class AppComponent {
   constructor(private router: Router, ) { }
   title = 'assessment';
   // function for logging out user
+
   logOut(){
     sessionStorage.clear();
     this.router.navigate(['/']);

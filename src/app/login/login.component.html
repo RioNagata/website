@@ -4,12 +4,14 @@
   <form (submit)="Login($event)">
     <div class="form-group">
       <label for="productname">Username</label>
-      <input type="text" class="form-control" id="productname" [(ngModel)] = "username" name="username">
+      <input type="text" class="form-control textbox input" id="productname" [(ngModel)] = "username" name="username">
     </div>
+    <br>
     <div class="form-group">
       <label for="productname">Password</label>
-      <input type="text" class="form-control" id="productdesc" [(ngModel)] = "pwd" name="password">
+      <input type="text" class="form-control textbox input" id="productdesc" [(ngModel)] = "pwd" name="password">
     </div>
+    <br>
     <div class="form-group">
       <button type="submit" class="btn btn-primary">Login<i class="fa fa-plus-square"></i></button>
     </div>

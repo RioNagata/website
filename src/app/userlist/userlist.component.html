@@ -1,3 +1,16 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
+    <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        <li> <a class="nav-link" routerLink="/chat">Chat</a></li>
+        <li><a class="nav-link" routerLink="/add">Add Users</a></li>
+        <li><a class="nav-link" routerLink="/user">Users</a></li>
+      </ul>
+      <ul class="nav navbar-nav ml-auto">
+        <button type="button" class="btn btn-outline-success my-2 my-sm-0 float-right" (click)="logOut()">Log Out</button>
+      </ul>
+    </div>
+  </nav>
+  
 <div class="container">
     <h1>Users</h1>
     <table class="table">
@@ -10,8 +23,8 @@
             <td>{{user.username}}</td>
             <td>{{user.email}}</td>
             <td>{{user.userrole}}</td>
-            <td><button type="button" class="btn btn-primary btn-block mb-4" [routerLink]="['/update', user.userid]">Update</button></td>
-            <td><button type="button" class="btn btn-primary btn-block mb-4" (click)="deleteproduct(user.userid)">Delete {{user.username}}</button></td>
+            <td><button type="button" class="btn btn-primary btn-block mb-4 buttonsetting" [routerLink]="['/update', user.userid]">Update</button></td>
+            <td><button type="button" class="btn btn-primary btn-block mb-4 buttonsetting" (click)="deleteproduct(user.userid)">Delete {{user.username}}</button></td>
         </tr>
     </table>
 </div>

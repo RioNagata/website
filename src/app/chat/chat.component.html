@@ -1,32 +1,57 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
+    <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        <li> <a class="nav-link" routerLink="/chat">Chat</a></li>
+        <li><a class="nav-link" routerLink="/add">Add Users</a></li>
+        <li><a class="nav-link" routerLink="/user">Users</a></li>
+      </ul>
+      <ul class="nav navbar-nav ml-auto">
+        <button type="button" class="btn btn-outline-success my-2 my-sm-0 float-right" (click)="logOut()">Log Out</button>
+      </ul>
+    </div>
+  </nav>
 <div class="container">
     <h1>Chat Channel</h1>
     <h3>User: {{username}}</h3>
-    <form>
-        <select [(ngModel)] = "roomslist" *ngIf="!isinRoom" name="roomslist">
-            <option [ngValue]="null">Select Room</option>
-            <option *ngFor="let room of rooms">
-                {{room.roomname}}
-            </option>
-        </select>
-        <div class="form-group">
-            <button *ngIf="!isinRoom" (click)="joinroom()" class="btn btn-primary">Join</button> &nbsp;
+    <div class="float-container">
+
+        <div class="float-child">
+            <label for="newroom" *ngIf="!isinRoom" >Rooms</label>
+            <br>
+            <select [(ngModel)] = "roomslist" *ngIf="!isinRoom" name="roomslist">
+                <option [ngValue]="null">Select Room</option>
+                <option *ngFor="let room of rooms">
+                    {{room.roomname}}
+                </option>
+            </select>
+            <div class="form-group">
+                <button *ngIf="!isinRoom" (click)="joinroom()" class="btn btn-primary">Join</button> &nbsp;
+            </div>
         </div>
-        <label for="newroom" *ngIf="isadmin">New Room</label>
-        <input type="text" [(ngModel)]="newroom" *ngIf="isadmin" name="newroom" id="newroom" class="form-control"/>
-        <button (click)="createroom()" class="btn btn-primary" *ngIf="isadmin">create new room</button>
-    </form>
+        
+        <div class="float-child">
+            <form>
+                <label for="newroom" *ngIf="isadmin">New Room</label>
+                <input type="text" [(ngModel)]="newroom" *ngIf="isadmin" name="newroom" id="newroom" class="form-control"/>
+                <button (click)="createroom()" class="btn btn-primary" *ngIf="isadmin">create new room</button>
+            </form>
+        </div>
+        
+    </div>
     <h2 *ngIf="isinRoom">Chat messages for {{currentroom}}</h2>
     <button *ngIf="isinRoom" (click)="leaveroom()" class="btn btn-primary">Leave</button> &nbsp;
     <p>{{roomnotice}}</p>
     <form>
-        <div class="form-group" *ngIf="isinRoom">
+        <div class="form-group rooms" *ngIf="isinRoom">
             <label for="messagecontent">Image</label>
             <input type="file" ngModel="imagecontent" name="imagecontent" id="imagecontent" class="form-control">
+            <br>
             <label for="messagecontent">New Message</label>
             <input type="text" [(ngModel)]="messagecontent" name="messagecontent" id="messagecontent" class="form-control"/>
             <button *ngIf="isinRoom" (click)="chat()" class="btn btn-primary" name="createroom" id="createroom">Chat</button> &nbsp;
         </div>
     </form>
+    <br>
     <ul>
         <li *ngFor="let message of messages">{{message}}</li>
         <li *ngFor="let image of images"><img src="{{image}}"></li>

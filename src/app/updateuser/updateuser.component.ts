@@ -25,6 +25,12 @@ export class UpdateuserComponent implements OnInit {
       this.updateid = params['iteminfo']
     })
   }
+    
+  logOut(){
+    sessionStorage.clear();
+    this.router.navigate(['/']);
+  }
+  
   // function for editing user info
   editUser(event: { preventDefault: () => void; }){
     event.preventDefault();

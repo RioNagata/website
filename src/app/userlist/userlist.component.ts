@@ -33,4 +33,9 @@ export class UserlistComponent implements OnInit {
       this.router.navigateByUrl('products');
     }
   }
+
+  logOut(){
+    sessionStorage.clear();
+    this.router.navigate(['/']);
+  }
 }

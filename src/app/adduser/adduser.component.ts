@@ -33,6 +33,12 @@ export class AdduserComponent implements OnInit {
     return this.noticeshow ? 'show':'hide';
   }
 
+    
+  logOut(){
+    sessionStorage.clear();
+    this.router.navigate(['/']);
+  }
+
   // function for adding users
   addnewUser(event: { preventDefault: () => void; }){
     event.preventDefault();
