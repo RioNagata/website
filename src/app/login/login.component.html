@@ -1,19 +1,28 @@
-<div class="container">
-  <h1>ChatChannel</h1>
-  <h2>Login</h2>
-  <form (submit)="Login($event)">
-    <div class="form-group">
-      <label for="productname">Username</label>
-      <input type="text" class="form-control textbox input" id="productname" [(ngModel)] = "username" name="username">
-    </div>
+<div class="bg">
+  <div class="container">
+    <h1><span>ChatChannel</span></h1>
     <br>
-    <div class="form-group">
-      <label for="productname">Password</label>
-      <input type="text" class="form-control textbox input" id="productdesc" [(ngModel)] = "pwd" name="password">
-    </div>
+    <h2><span>ログイン</span></h2>
     <br>
-    <div class="form-group">
-      <button type="submit" class="btn btn-primary">Login<i class="fa fa-plus-square"></i></button>
-    </div>
-  </form>
+    
+    <form (submit)="Login($event)">
+      <div class="form-group">
+        <label for="productname"><span>ユーザー名</span></label>
+        <input type="text" class="form-control textbox input" id="productname" [(ngModel)] = "username" name="username">
+      </div>
+      <br>
+      <br>
+
+      <div class="form-group">
+        <label for="productname"><span>パスワード</span></label>
+        <input type="text" class="form-control textbox input" id="productdesc" [(ngModel)] = "pwd" name="password">
+      </div>
+      <br>
+      <br>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">ログイン<i class="fa fa-plus-square"></i></button>
+      </div>
+    </form>
+  </div>
 </div>

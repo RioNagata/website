@@ -1,12 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
   <div class="container-fluid">
     <ul class="nav navbar-nav">
-      <li> <a class="nav-link" routerLink="/chat">Chat</a></li>
-      <li><a class="nav-link" routerLink="/add">Add Users</a></li>
-      <li><a class="nav-link" routerLink="/user">Users</a></li>
+      <li> <a class="nav-link" routerLink="/chat">チャット</a></li>
+      <li><a class="nav-link" routerLink="/add">ユーザー追加</a></li>
+      <li><a class="nav-link" routerLink="/user">ユーザー一覧</a></li>
     </ul>
     <ul class="nav navbar-nav ml-auto">
-      <button type="button" class="btn btn-outline-success my-2 my-sm-0 float-right" (click)="logOut()">Log Out</button>
+      <button type="button" class="btn btn-outline-success my-2 my-sm-0 float-right" (click)="logOut()">ログアウト</button>
     </ul>
   </div>
 </nav>
@@ -14,23 +14,23 @@
 <div class="container">
     <form (submit)="editUser($event)">
       <div class="form-group">
-        <label for="productname">Username</label>
+        <label for="productname">ユーザー名</label>
         <input type="text" class="form-control" id="username" [(ngModel)] = "updatename" name="updatename">
       </div>
       <div class="form-group">
-        <label for="productname">Email</label>
+        <label for="productname">Eメール</label>
         <input type="text" class="form-control" id="email" [(ngModel)] = "updateemail" name="updateemail">
       </div>
       <div class="form-group">
-        <label for="productname">Password</label>
+        <label for="productname">パスワード</label>
         <input type="text" class="form-control" id="password" [(ngModel)] = "updatepassword" name="updatepassword">
       </div>
       <div class="form-group">
-        <label for="productname">User Role</label>
+        <label for="productname">Userrole</label>
         <input type="text" class="form-control" id="userrole" [(ngModel)] = "updaterole" name="updaterole">
       </div>
       <div class="form-group">
-        <button type="submit" class="btn btn-primary"><i class="fa fa-plus-square">Submit</i></button>
+        <button type="submit" class="btn btn-primary"><i class="fa fa-plus-square">ユーザー作成</i></button>
       </div>
     </form>
   </div>

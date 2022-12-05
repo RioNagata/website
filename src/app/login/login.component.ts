@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     event.preventDefault();
     // if username or/and password is missing, send error
     if(this.username == "" || this.pwd == ""){
-      alert("Insert both username and password")
+      alert("ユーザー名とパスワードを記入してください")
     } else {
       this.loginform = {
         // set loginform array's data as the new login data
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem("userrole", data[0]['userrole']);
           this.router.navigateByUrl('chat');
         } else {
-          alert("user or password is not valid")
+          alert("ユーザー名かパスワードが間違っています")
         }
       });
     }

@@ -1,52 +1,52 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
     <div class="container-fluid">
       <ul class="nav navbar-nav">
-        <li> <a class="nav-link" routerLink="/chat">Chat</a></li>
-        <li><a class="nav-link" routerLink="/add">Add Users</a></li>
-        <li><a class="nav-link" routerLink="/user">Users</a></li>
+        <li> <a class="nav-link" routerLink="/chat">チャット</a></li>
+        <li><a class="nav-link" routerLink="/add">ユーザー追加</a></li>
+        <li><a class="nav-link" routerLink="/user">ユーザー一覧</a></li>
       </ul>
       <ul class="nav navbar-nav ml-auto">
-        <button type="button" class="btn btn-outline-success my-2 my-sm-0 float-right" (click)="logOut()">Log Out</button>
+        <button type="button" class="btn btn-outline-success my-2 my-sm-0 float-right" (click)="logOut()">ログアウト</button>
       </ul>
     </div>
   </nav>
 <div class="container">
-    <h1>Chat Channel</h1>
-    <h3>User: {{username}}</h3>
+    <h1>チャットチャンネル</h1>
+    <h3>ユーザー名: {{username}}</h3>
     <div class="float-container">
 
         <div class="float-child">
-            <label for="newroom" *ngIf="!isinRoom" >Rooms</label>
+            <label for="newroom" *ngIf="!isinRoom" >ルーム</label>
             <br>
             <select [(ngModel)] = "roomslist" *ngIf="!isinRoom" name="roomslist">
-                <option [ngValue]="null">Select Room</option>
+                <option [ngValue]="null">ルーム選択</option>
                 <option *ngFor="let room of rooms">
                     {{room.roomname}}
                 </option>
             </select>
             <div class="form-group">
-                <button *ngIf="!isinRoom" (click)="joinroom()" class="btn btn-primary">Join</button> &nbsp;
+                <button *ngIf="!isinRoom" (click)="joinroom()" class="btn btn-primary">参加</button> &nbsp;
             </div>
         </div>
         
         <div class="float-child">
             <form>
-                <label for="newroom" *ngIf="isadmin">New Room</label>
+                <label for="newroom" *ngIf="isadmin">ルーム作成</label>
                 <input type="text" [(ngModel)]="newroom" *ngIf="isadmin" name="newroom" id="newroom" class="form-control"/>
-                <button (click)="createroom()" class="btn btn-primary" *ngIf="isadmin">create new room</button>
+                <button (click)="createroom()" class="btn btn-primary" *ngIf="isadmin">新しいルームを作成</button>
             </form>
         </div>
         
     </div>
-    <h2 *ngIf="isinRoom">Chat messages for {{currentroom}}</h2>
-    <button *ngIf="isinRoom" (click)="leaveroom()" class="btn btn-primary">Leave</button> &nbsp;
+    <h2 *ngIf="isinRoom">{{currentroom}}のメッセージ</h2>
+    <button *ngIf="isinRoom" (click)="leaveroom()" class="btn btn-primary">退室</button> &nbsp;
     <p>{{roomnotice}}</p>
     <form>
         <div class="form-group rooms" *ngIf="isinRoom">
-            <label for="messagecontent">Image</label>
+            <label for="messagecontent">画像</label>
             <input type="file" ngModel="imagecontent" name="imagecontent" id="imagecontent" class="form-control">
             <br>
-            <label for="messagecontent">New Message</label>
+            <label for="messagecontent">新しいメッセージ</label>
             <input type="text" [(ngModel)]="messagecontent" name="messagecontent" id="messagecontent" class="form-control"/>
             <button *ngIf="isinRoom" (click)="chat()" class="btn btn-primary" name="createroom" id="createroom">Chat</button> &nbsp;
         </div>

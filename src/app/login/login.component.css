@@ -1,3 +1,9 @@
+.bg{
+  background-image: url("image/bg.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 .textbox{
     width: 200px;
 }
@@ -6,6 +12,20 @@
     text-align: center;
 }
 
+
+h1 span{
+    background-color: white;
+}
+
+h2 span{
+    background-color: white;
+}
+
+label span{
+    background-color: white;
+}
+
 .input{
     margin: auto;
 }
+
