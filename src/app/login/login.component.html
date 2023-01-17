@@ -2,26 +2,26 @@
   <div class="container">
     <h1><span>ChatChannel</span></h1>
     <br>
-    <h2><span>ログイン</span></h2>
+    <h2><span>Login</span></h2>
     <br>
     
     <form (submit)="Login($event)">
       <div class="form-group">
-        <label for="productname"><span>ユーザー名</span></label>
+        <label for="productname"><span>Username</span></label>
         <input type="text" class="form-control textbox input" id="productname" [(ngModel)] = "username" name="username">
       </div>
       <br>
       <br>
 
       <div class="form-group">
-        <label for="productname"><span>パスワード</span></label>
+        <label for="productname"><span>Password</span></label>
         <input type="text" class="form-control textbox input" id="productdesc" [(ngModel)] = "pwd" name="password">
       </div>
       <br>
       <br>
 
       <div class="form-group">
-        <button type="submit" class="btn btn-primary">ログイン<i class="fa fa-plus-square"></i></button>
+        <button type="submit" class="btn btn-primary">Login<i class="fa fa-plus-square"></i></button>
       </div>
     </form>
   </div>
