@@ -1,17 +1,17 @@
 # Chat Channel
 
-## 機能
+## Features
 
-### ログイン機能
+### Login Feature
 
-Chat Channelを使用する際ログインする必要があります。　ログインをするためにはユーザ名とパスワードが必要です。　ユーザ名とパスワードどちらかが欠けている、ユーザ名とパスワードが間違っている場合、ポップアップエラーが出てきます。
+You must be logged in to use the Chat Channel.　A username and password are required to log in.　If either the username or password is missing, or if the username and password are incorrect, a pop-up error will appear.
 
-### 新規ユーザー作成、編集、削除
+### Create, Edit and Delete User
 
-Chat Channelはユーザーが新規ユーザーのアカウントを作ることができます。アカウントを作るにはユーザー名、Eメール、ユーザーID、User Roleを記入してください。User Roleはuser、gassist、gadmin、superの中から記入してください。アカウント情報が欠けている、User Roleが指定されたRoleでない場合、ポップアップエラーが出てきます。ユーザー一覧から全ユーザーの情報を編集、削除することができます。情報を編集する時にも、アカウント情報が欠けている、User Roleが指定されたRoleでない場合、ポップアップエラーが出てきます。
+Chat Channel allows users to create new user accounts. To create an account, user name, email, user ID, and User Role is required, where User Role can be one of the following: user, gassist, gadmin, or super. If account information is missing or User Role is not the specified Role, a pop-up error will appear. You can edit or delete information for all users from the user list. When editing information, you will also get a pop-up error if the account information is missing or if the User Role is not the specified Role.
 
-### チャット機能
-Chat Channelのチャット機能を使用する際には、チャットルームを作成してチャットルームを作成して入室する必要があります。チャットルームに入室したらメッセージ欄と画像ボタンが出てきます。メッセージ欄にメッセージを記入して送信するとルーム内にいるメンバー全員に表示されます。画像送信はまだ機能していません。
+### Chat Feature
+To use Chat Channel's chat feature, you must create a chat room and enter the chat room by creating a chat room. Once you enter a chat room, you will see a message field and an image button. Fill in your message in the message field and send it, and it will be displayed to all members in the room. Sending an image is not functional yet.
 
 ## 使用言語
 ### HTML
