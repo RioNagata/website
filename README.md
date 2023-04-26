@@ -13,7 +13,7 @@ Chat Channel allows users to create new user accounts. To create an account, use
 ### Chat Feature
 To use Chat Channel's chat feature, you must create a chat room and enter the chat room by creating a chat room. Once you enter a chat room, you will see a message field and an image button. Fill in your message in the message field and send it, and it will be displayed to all members in the room. Sending an image is not functional yet.
 
-## 使用言語
+## Used Languages
 ### HTML
 ### CSS
 ### Angular(TypeScript)
